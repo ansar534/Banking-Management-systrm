@@ -1,0 +1,221 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<math.h>
+#include<string.h>
+#include<stdbool.h>
+struct account
+{
+  int account, phno, aadhar, money, initial_money, new_money;
+  char name[20], address[30], username[20], password[20];
+} a1;
+struct loans
+{
+  int ltime, lamount, loan, l;
+} l1;
+struct deposits
+{
+  int deposit, dtime, damount, month, fixed, recurring, fd, rd;
+} d1;
+int
+main ()
+{
+  while (true)
+    {
+      int ch, choice, transaction, feature;
+      int a, b, c, d;
+      char name[32], address[50], username[25], password[25], check[25],
+	  user[25], user1[25], check1[25];
+      printf ("Welcome to banking management\n");
+      printf ("press 1 to create account\n");
+      printf ("press 2 to see menu\n");
+      printf ("press 3 to see your account\n");
+      printf ("press 4 to exit\n");
+      printf("\n");
+      printf ("enter your choice:\n");
+      scanf ("%d", &ch);
+      if (ch == 1)
+	{
+	  printf ("enter account number\n");
+	  scanf ("%d", &a1.account);
+	  printf ("enter name\n");
+	  scanf ("%s", &a1.name);
+	  printf ("enter phone number\n");
+	  scanf ("%d", &a1.phno);
+	  printf ("enter address\n");
+	  scanf ("%s", &a1.address);
+	  printf ("enter aadhar card number\n");
+	  scanf ("%d", &a1.aadhar);
+	  printf ("enter initial money to start account\n");
+	  scanf ("%d", &a1.money);
+	  a1.initial_money = a1.money;
+	  printf ("enter username\n");
+	  scanf ("%s", &a1.username);
+	  printf ("enter password\n");
+	  scanf ("%s", &a1.password);
+	  printf ("Your account has been created successfully\n");
+	  printf("\n");
+	}
+
+      else if (ch == 2)
+	{
+	  printf ("welcome to main menu:\n");
+	  printf ("press 1 for transactions\n");
+	  printf ("press 2 for features\n");
+	  printf("\n");
+	  printf ("enter your choice:\n");
+	  scanf ("%d", &choice);
+	  if (choice == 1)
+	    {
+	      printf ("your current balance is:%d\n", a1.money);
+	      printf ("press\n1.to add money\n2.to remove money\n");
+	      printf("\n");
+	      printf ("enter your choice:\n");
+	      scanf ("%d", &transaction);
+	      if (transaction == 1)
+		{
+		  printf ("enter money to be added:\n");
+		  scanf ("%d", &a1.new_money);
+		  a1.money = a1.money + a1.new_money;
+		  printf ("your current balance is %d\n", a1.money);
+		  printf("\n");
+		}
+	      else if (transaction == 2)
+		{
+		  printf ("enter money to be removed:");
+		  scanf ("%d", &a1.new_money);
+		  if (a1.new_money > a1.money)
+		    {
+		      printf ("insufficient funds\n");
+		      printf("\n");
+		    }
+		  else
+		    {
+		      a1.money = a1.money - a1.new_money;
+		      printf ("your current balance is %d\n", a1.money);
+		      printf("\n");
+		    }
+		}
+	    }
+	  else if (choice == 2)
+	    {
+	      printf ("welcome to features offered by our bank:\n");
+	      printf ("press 1 for loans\n");
+	      printf ("press 2 for deposits\n");
+	      printf("\n");
+	      printf ("enter your choice:\n");
+	      scanf ("%d", &feature);
+	      if (feature == 1)
+		{
+		  printf ("welcome to loans\n");
+		  printf ("the rate of interest is 5%\n");
+		  printf("the time period is 1-120 months\n");
+		  printf("the maximum loan amount is 30lakhs\n");
+		  printf ("enter time(in months),amount required:\n");
+		  scanf ("%d %d", &l1.ltime, &l1.lamount);
+		  l1.l=(l1.lamount)*(4.166666666666667);//rate/no of payments per year
+		  printf ("you have to pay %d every month for %d months\n",l1.l, l1.ltime);
+		  printf ("press 1 if you want loan:\n");
+		  scanf ("%d", &l1.loan);
+		  if (l1.loan == 1)
+		    {
+		      printf ("your loan is approved\n");
+		      printf("\n");
+		    }
+
+		}
+	      else if (feature == 2)
+		{
+		  printf ("welcome to deposists\n");
+		  printf("press 1 for fixed deposit\npress 2 for recurring deposit\n");
+          printf("\n");
+		  printf ("enter your choice:\n");
+		  scanf ("%d", &d1.deposit);
+		  if (d1.deposit == 1)
+		    {
+		      printf ("the rate of interest is 5%\n");
+		      printf("the time period is 1-120months\n");
+		      printf("enter time(in months),principal amount, installment per month:\n");
+		      scanf ("%d %d %d", &d1.dtime, &d1.damount, &d1.month);
+		      c = (d1.damount*d1.dtime*5)/100;
+		      d1.fd = (d1.damount+c);
+		      printf ("you will get %d rupees\n", d1.fd);
+		      printf ("press 1 if you want fixed deposit:\n");
+		      scanf ("%d", &d1.fixed);
+		      if (d1.fixed == 1)
+			{
+			  printf ("your deposit is approved\n");
+			  printf("\n");
+			}
+		    }
+		  else if (d1.deposit == 2)
+		    {
+		      printf ("the rate of interest is 5%\n");
+              printf("enter time(in months),amount required, installment per month:\n");
+		      scanf ("%d %d %d", &d1.dtime, &d1.damount, &d1.month);
+		      d =d1.damount*(1+(0.4166666666666667*d1.month)*d1.dtime);
+		      d1.rd = d1.damount+d;
+		      printf ("you will get %d\nrupees", d1.rd);
+		      printf ("press 1 if you want recurring deposit:\n");
+		      scanf ("%d", &d1.recurring);
+		      if (d1.recurring == 1)
+			{
+			  printf ("your deposit is approved\n");
+			  printf("\n");
+			}
+		    }
+		}
+	    }
+	}
+      else if (ch == 3)
+	{         while (true)
+	 {         printf("enter username:");
+	           scanf("%s",&user);
+	           if (strcmp(a1.username,user) == 0)
+                {
+                    printf("enter password:");
+                    scanf("%s",&check);
+                    if (strcasecmp(check,a1.password)==0)
+                    {
+                         printf ("Welcome MR/MIS %s\n",a1.name);
+		                 printf ("Account Details:-\n");
+		                 printf ("Account number:%d\n", a1.account);
+		                 printf ("Phone number:%d\n", a1.phno);
+		                 printf ("Address:%s\n", a1.address);
+                         printf ("Aadhar card number:%d\n", a1.aadhar);
+		                 printf ("Initial money in the account:%d\n",a1.initial_money);
+		                 printf ("Present account balance:%d\n", a1.money);
+		                 printf("\n");
+                    }
+                    else
+                    {
+                        printf("wrong password");
+                        printf("\n");
+                        break;
+                    }
+                }
+              else
+              {
+
+
+                printf("invalid username" );
+                printf("\n");
+              }
+
+
+
+     }
+	}
+      else if (ch == 4)
+	{
+	  break;
+	}
+      else
+	{
+	  printf ("error");
+	  printf("\n");
+
+	}
+    }
+  return 0;
+
+}
